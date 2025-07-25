@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/OracleDS"
+              auth="Container"
+              type="javax.sql.DataSource"
+              factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+              driverClassName="oracle.jdbc.OracleDriver"
+              url="jdbc:oracle:thin:@localhost:1521:free" username="c##BDPROYECTO" password="1234567" maxTotal="20"
+              maxIdle="10"
+              maxWaitMillis="-1" />
+
+    <Resource name="jdbc/PostgresDS"
+              auth="Container"
+              type="javax.sql.DataSource"
+              factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://localhost:5432/BDPROYECTO" username="postgres" password="123456" maxTotal="20"
+              maxIdle="10"
+              maxWaitMillis="-1" />
+
+    <Resource name="jdbc/SQLServerDS"
+              auth="Container"
+              type="javax.sql.DataSource"
+              factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+              driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+              url="jdbc:sqlserver://localhost:1433;databaseName=BDPROYECTO;encrypt=false;trustServerCertificate=true;" username="sa" password="1234567" maxTotal="20"
+              maxIdle="10"
+              maxWaitMillis="-1" />
+
+    <Resource name="jdbc/MySQLDS"
+              auth="Container"
+              type="javax.sql.DataSource"
+              factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/bdproyecto?serverTimezone=UTC" username="root" password="mysql123" maxTotal="20"
+              maxIdle="10"
+              maxWaitMillis="-1" />
+</Context>

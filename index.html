@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velocidad Gestores</title>
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+</head>
+
+<body class="bg-light">
+    <div class="container py-4">
+
+        <div class="card m-auto">
+            <div class="card-header">
+                <h3 class="text-center text-uppercase">Velocidad de gestores</h3>
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-xl-3 col-sm-6 d-grid gap-2 mb-2">
+                        <div class="btn-group" role="group">
+                            <button id="dropdownOracle" type="button" class="btn btn-danger dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Oracle 23ai
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownOracle">
+                                <li><button class="dropdown-item" id="oracle_statu">Estado Oracle 23ai</button></li>
+                                <li><button class="dropdown-item" id="oracle_delete">Borrar registros Oracle</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3 col-sm-6 d-grid gap-2 mb-2">
+                        <div class="btn-group" role="group">
+                            <button id="dropdownPostgres" type="button" class="btn btn-primary dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Postgres
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownPostgres">
+                                <li><button class="dropdown-item" id="postgres_statu">Estado Postgres</button></li>
+                                <li><button class="dropdown-item" id="postgres_delete">Borrar registros Postgres</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3 col-sm-6 d-grid gap-2 mb-2">
+                        <div class="btn-group" role="group">
+                            <button id="dropdownSqlServer" type="button" class="btn btn-secondary dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                SQL server 2022
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownSqlServer">
+                                <li><button class="dropdown-item" id="sqlserver_statu">Estado SQL server 2022</button>
+                                </li>
+                                <li><button class="dropdown-item" id="sqlserver_delete">Borrar registros SQL
+                                            server 2022</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3 col-sm-6 d-grid gap-2 mb-2">
+                        <div class="btn-group" role="group">
+                            <button id="dropdownMysql" type="button" class="btn btn-warning dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                My Sql
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMysql">
+                                <li><button class="dropdown-item" id="mysql_statu">Estado Mysql</button></li>
+                                <li><button class="dropdown-item" id="mysql_delete">Borrar registros Mysql</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form id="form" method="post">
+                    <div class="row mb-3">
+                        <div class="col-xl-3 col-md-3 col-sm-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="id_producto" value="1" name="id_producto"
+                                    placeholder="Ingresar id" required>
+                                <label for="id_producto">Id <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-3 col-sm-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="descripcion" name="descripcion"
+                                    value="Computadora" placeholder="ingresar descripción" required>
+                                <label for="descripcion">Descripción <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-3 col-sm-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="precio" name="precio" value="1000"
+                                    placeholder="Ingresar precio" required>
+                                <label for="precio">Precio <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-3 col-sm-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="fecha" name="fecha" value="2022-12-12"
+                                    placeholder="Ingresar finicio" required readonly>
+                                <label for="fecha">Fecha <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 class="bg-danger rounded p-1 text-white">Oracle</h2>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-outline-danger" id="oracle_lmd">Insertar registros LDM</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_oracleLMD" value="0"
+                                                disabled>
+                                        </div>
+                                        <!-- NUEVO BOTÓN DE BENCHMARK LDM -->
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-danger" id="oracle_lmd_benchmark">Insertar 1000 Registros LDM</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_oracleLMD_benchmark" value="0" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-outline-danger" id="oracle_sp">Insertar registros SP</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_oracleSP" value="0"
+                                                disabled>
+                                        </div>
+                                        <!-- NUEVO BOTÓN DE BENCHMARK SP -->
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-danger" id="oracle_sp_benchmark">Insertar 1000 Registros SP</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_oracleSP_benchmark" value="0" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 class="bg-primary rounded p-1 text-white">Postgres</h2>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-outline-primary" id="postgres_lmd">Insertar registros LDM</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_pgLMD" value="0" disabled>
+                                        </div>
+                                        <!-- NUEVO BOTÓN DE BENCHMARK LDM -->
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-primary" id="postgres_lmd_benchmark">Insertar 1000 Registros LDM</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_pgLMD_benchmark" value="0" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-outline-primary" id="postgres_sp">Insertar registros SP</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_postgresSP" value="0"
+                                                disabled>
+                                        </div>
+                                        <!-- NUEVO BOTÓN DE BENCHMARK SP -->
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-primary" id="postgres_sp_benchmark">Insertar 1000 Registros SP</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_postgresSP_benchmark" value="0" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 class="bg-secondary rounded p-1 text-white">Sql server</h2>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-outline-secondary" id="sqlserver_lmd">Insertar registros - LDM</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_sqlserverLMD" value="0"
+                                                disabled>
+                                        </div>
+                                        <!-- NUEVO BOTÓN DE BENCHMARK LDM -->
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-secondary" id="sqlserver_lmd_benchmark">Insertar 1000 Registros LDM</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_sqlserverLMD_benchmark" value="0" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-outline-secondary" id="sqlserver_sp">Insertar registros - SP</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_sqlserverSP" value="0"
+                                                disabled>
+                                        </div>
+                                        <!-- NUEVO BOTÓN DE BENCHMARK SP -->
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-secondary" id="sqlserver_sp_benchmark">Insertar 1000 Registros SP</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_sqlserverSP_benchmark" value="0" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 class="bg-warning rounded p-1 text-white">My Sql</h2>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" name="btn_lmdOracle" id="mysql_lmd"
+                                                class="btn btn-outline-warning">Insertar
+                                                registros LDM</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_mysqlLMD" value="0"
+                                                disabled>
+                                        </div>
+                                        <!-- NUEVO BOTÓN DE BENCHMARK LDM -->
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-warning" id="mysql_lmd_benchmark">Insertar 1000 Registros LDM</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_mysqlLMD_benchmark" value="0" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" name="btn_spOracle" id="mysql_sp"
+                                                class="btn btn-outline-warning">Insertar
+                                                registros SP</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" name="txt_mysqlSP" value="0"
+                                                id="txt_mysqlSP" disabled>
+                                        </div>
+                                        <!-- NUEVO BOTÓN DE BENCHMARK SP -->
+                                        <div class="col-md-12 d-grid gap-2 mb-3">
+                                            <button type="button" class="btn btn-warning" id="mysql_sp_benchmark">Insertar 1000 Registros SP</button>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input class="form-control" type="text" id="txt_mysqlSP_benchmark" value="0" disabled>
+                                        </div>
+                                        <div id="resultado"></div>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="public/jquery-3.6.2.min.js"></script>
+    <script src="public/js/bootstrap.bundle.min.js"></script>
+    <script src="public/sweetalert2.all.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+            const day = String(today.getDate()).padStart(2, '0');
+            document.getElementById('fecha').value = `${year}-${month}-${day}`;
+        });
+    </script>
+
+    <script src="pull_conexion.js"></script> 
+
+</body>
+
+</html>
