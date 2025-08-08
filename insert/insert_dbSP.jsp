@@ -37,7 +37,6 @@ try {
         return;
     }
 
-    // ID_PRODUCTO es VARCHAR en tu tabla y SP, por lo tanto, se mantiene como String.
     String id_producto = idStr.trim(); 
 
     BigDecimal precio;
@@ -69,25 +68,25 @@ try {
         case "oracle":
             ds = (DataSource) initCtx.lookup("java:comp/env/jdbc/OracleDS");
             dbName = "Oracle 23ai";
-            // Asegúrate de que este nombre de SP sea el correcto en tu BD Oracle
+            
             spCall = "{call PA_INSERTARPRODUCTO(?, ?, ?, ?)}"; 
             break;
         case "postgres":
             ds = (DataSource) initCtx.lookup("java:comp/env/jdbc/PostgresDS");
             dbName = "PostgreSQL";
-            // *** CORRECCIÓN CLAVE AQUÍ: Usar CALL explícito para procedimientos en PostgreSQL ***
+        
             spCall = "CALL PA_INSERTARPRODUCTO(?::VARCHAR, ?::VARCHAR, ?::NUMERIC, ?::DATE)"; 
             break;
         case "sqlserver":
             ds = (DataSource) initCtx.lookup("java:comp/env/jdbc/SQLServerDS");
             dbName = "SQL Server 2022";
-            // Asegúrate de que este nombre de SP sea el correcto en tu BD SQL Server
+            
             spCall = "{call PA_INSERTARPRODUCTO (?, ?, ?, ?)}"; 
             break;
         case "mysql":
             ds = (DataSource) initCtx.lookup("java:comp/env/jdbc/MySQLDS");
             dbName = "MySQL";
-            // Asegúrate de que este nombre de SP sea el correcto en tu BD MySQL
+            
             spCall = "{call PA_INSERTARPRODUCTO(?, ?, ?, ?)}"; 
             break;
         default:
@@ -100,7 +99,7 @@ try {
     if (ds != null) {
         conn = ds.getConnection();
         cstmt = conn.prepareCall(spCall);
-        cstmt.setString(1, id_producto); // Establecer ID como String
+        cstmt.setString(1, id_producto); 
         cstmt.setString(2, descripcion);
         cstmt.setBigDecimal(3, precio);
         cstmt.setDate(4, fechaSql);
