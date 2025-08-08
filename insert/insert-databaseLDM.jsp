@@ -59,7 +59,6 @@ try {
 
     Date fechaSql;
     try {
-        // Asumiendo formato AAAA-MM-DD
         fechaSql = Date.valueOf(fechaStr.trim()); 
     } catch (IllegalArgumentException e) { // Catches error from Date.valueOf
         resultOutput = "0,Error de formato: La fecha debe ser AAAA-MM-DD.";
@@ -72,7 +71,6 @@ try {
     Context initCtx = new InitialContext();
     DataSource ds = null;
     String dbName = "";
-    // Asegúrate de que esta query sea compatible con TODAS tus bases de datos
     String sql = "INSERT INTO PRODUCTO (ID_PRODUCTO, DESCRIPCION, PRECIO, FECHA) VALUES (?, ?, ?, ?)"; 
 
     switch (method.toLowerCase()) {
@@ -124,8 +122,7 @@ try {
     }
 
 } catch (SQLException e) {
-    // Código de estado SQL para violación de restricción de integridad (ej. clave primaria duplicada)
-    // Puede variar ligeramente entre bases de datos, pero los que empiezan con '23' son comunes.
+    // Código de estado SQL para violación de restricción de integridad p
     if (e.getSQLState() != null && e.getSQLState().startsWith("23")) { 
         resultOutput = "0,Error SQL: El ID de producto ya existe en " + method + ".";
     } else {
