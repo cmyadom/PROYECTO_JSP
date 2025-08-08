@@ -17,7 +17,7 @@ try {
     Context initCtx = new InitialContext();
     DataSource ds = null;
     String dbName = "";
-    String sql = "DELETE FROM PRODUCTO"; // Ejemplo de query de borrado (ASEGURATE QUE ESTA TABLA EXISTA EN TODAS LAS BBDD)
+    String sql = "DELETE FROM PRODUCTO";
 
     switch (method.toLowerCase()) {
         case "oracle":
